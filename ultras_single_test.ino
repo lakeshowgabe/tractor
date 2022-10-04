@@ -29,18 +29,19 @@ void setup() {
   Serial.begin(9600); // Starts the serial communication for n seconds 
   // put your setup code here, to run once:
 
+  digitalWrite(motor1pin1, LOW); // 
+  digitalWrite(motor1pin2, HIGH);
+  //delay(1000);
+
+  digitalWrite(motor2pin1, HIGH); // 
+  digitalWrite(motor2pin2, LOW);
 }
 
 void loop() {
   analogWrite(9,255);
   analogWrite(10,255);
   
-  digitalWrite(motor1pin1, LOW); // kill
-  digitalWrite(motor1pin2, HIGH);
-  //delay(1000);
-
-  digitalWrite(motor2pin1, HIGH); // kill
-  digitalWrite(motor2pin2, LOW);
+ 
 
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2); //resets trigger pin 
@@ -50,33 +51,23 @@ void loop() {
   digitalWrite(trigPin, LOW); //reset again
   // Reads the echoPin, returns the sound wave travel time in microseconds
   duration = pulseIn(echoPin, HIGH); //from the excho sent out will get a value
-  // Calculating the distance
+ 
   distance = duration * 0.034 / 2; //forumla to calculate distabce in CM
-
-  //if (stopdist == distance){ //if distace read is 20cm or less 
-    //digitalWrite(motor1pin1, LOW); // kill
-    //digitalWrite(motor1pin2, LOW);
-
-    //digitalWrite(motor2pin1, LOW); // kill
-    //digitalWrite(motor2pin2, LOW);
-  //}
-  //else {
+  
   Serial.print("Distance:");
   Serial.println(distance); //println the distance...
 
   if (distance <= 20){
-    STOPP == LOW;
-    }
-   else{
-    STOPP == HIGH;
-   }
 
-    
     digitalWrite(motor1pin1, LOW); // kill
-    digitalWrite(motor1pin2, STOPP);
+    digitalWrite(motor1pin2, LOW);
+  //delay(1000);
 
-    digitalWrite(motor2pin1, STOPP); // kill
+    digitalWrite(motor2pin1, LOW); //kill 
     digitalWrite(motor2pin2, LOW);
+    
+    }
+  
 }
 
    
@@ -88,3 +79,12 @@ void loop() {
  
 //}
   // put your main code here, to run repeatedly:
+
+    //if (stopdist == distance){ //if distace read is 20cm or less 
+    //digitalWrite(motor1pin1, LOW); // kill
+    //digitalWrite(motor1pin2, LOW);
+
+    //digitalWrite(motor2pin1, LOW); // kill
+    //digitalWrite(motor2pin2, LOW);
+  //}
+  //else {
